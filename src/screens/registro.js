@@ -1,8 +1,8 @@
 import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
 import { useState } from 'react';
-import { db, auth } from '../firebase/config';
+import { db, auth } from '../firebase/Config';
 
-function registro(props) {
+function Registro(props) {
     const [email, setEmail] = useState('');
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -34,10 +34,11 @@ function registro(props) {
                 })
                 .then(() => {
                     setRegisterError('');
-                    props.navigation.navigate('login');
+                    props.navigation.navigate('Login');
                 })
                 .catch(error => {
                     setRegisterError("Fallo en el registro");
+                    console.log(error);
                 });
         }
     }
@@ -121,4 +122,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default registro;
+export default Registro;

@@ -1,8 +1,8 @@
 import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
-import { useState } from 'react';
-import { auth } from '../firebase/config';
+import { useState,useEffect } from 'react';
+import { auth } from '../firebase/Config';
 
-function login(props) {
+function Login(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,13 +25,22 @@ function login(props) {
             auth.signInWithEmailAndPassword(email, pass)
                 .then(response => {
                     setLoginError('');
-                    props.navigation.navigate('homemenu');
+                    props.navigation.navigate('HomeMenu');
                 })
                 .catch(error => {
                     setLoginError('Credenciales incorrectas');
                 });
         }
     }
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            props.navigation.navigate('HomeMenu');
+          }
+        });
+      }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Ingresar</Text>
@@ -69,7 +78,7 @@ function login(props) {
 
             <Pressable
                 style={styles.buttonBlue}
-                onPress={() => props.navigation.navigate('Register')}
+                onPress={() => props.navigation.navigate('Registro')}
             >
                 <Text style={styles.buttonText}>No tengo cuenta</Text>
             </Pressable>
@@ -120,4 +129,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default login;
+export default Login;

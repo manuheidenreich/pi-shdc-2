@@ -2,27 +2,24 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
-import { auth } from './src/firebase/config';
+import { auth } from './src/firebase/Config';
 
-import login from './src/screens/login';
-import registro from './src/screens/registro';
-import homemenu from './src/components/homemenu';
+import Login from './src/screens/Login';
+import Registro from './src/screens/Registro';
+import HomeMenu from './src/components/HomeMenu';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [usuarioLogueado, setUsuarioLogueado] = useState(null);
   const [cargando, setCargando] = useState(true);
-
+  
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setUsuarioLogueado(user);
-      setCargando(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
+        auth.onAuthStateChanged(() => {
+          
+          setCargando(false);
+        });
+      }, []);
+  
   if (cargando) {
     return (
       <View style={styles.container}>
@@ -35,14 +32,9 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
-          {usuarioLogueado ? (
-            <Stack.Screen name="homemenu" component={homemenu} options={{ headerShown: false }} />
-          ) : (
-            <>
-              <Stack.Screen name="login" component={login} options={{ headerShown: false }} />
-              <Stack.Screen name="registro" component={registro} options={{ headerShown: false }} />
-            </>
-          )}
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="HomeMenu" component={HomeMenu} options={{ headerShown: false }} />
+          <Stack.Screen name="Registro" component={Registro} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { auth } from '../firebase/config';
+import { auth } from '../firebase/Config';
 
-function profile(props) {
+function Profile(props) {
     function Logout() {
         auth.signOut()
             .then(() => {
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default profile;
+export default Profile;
