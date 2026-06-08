@@ -1,16 +1,21 @@
-import { View, Text, Pressable, StyleSheet, TextInput, FlatList } from 'react-native';
-import { useEffect, useState } from 'react';
-import { db, auth } from '../firebase/config';
+import { View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
+import { useState } from 'react';
+import { db, auth } from '../Firebase/config';
 
 function nuevopost() {
 
     const [comentario, setComentario] = useState('');
 
      function crearPost() {
+        if (comentario === '') {
+            return;
+        }
+
         db.collection('posts').add({
             descripcionPost: comentario,
             email: auth.currentUser.email,
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            likes: []
         })
         .then(() => {
             setComentario('');

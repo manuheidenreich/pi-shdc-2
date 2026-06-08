@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { auth } from '../firebase/config';
+import { auth } from '../Firebase/config';
 
 function profile(props) {
     function Logout() {
