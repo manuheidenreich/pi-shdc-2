@@ -5,8 +5,8 @@ import Entypo from '@expo/vector-icons/Entypo';
 
 import home from '../screens/home';
 import profile from '../screens/profile';
-import usuario from '../Screens/usuario';
-import nuevopost from '../Screens/nuevopost';
+import usuario from '../screens/usuario';
+import nuevopost from '../screens/nuevopost';
 
 
 

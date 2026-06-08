@@ -32,12 +32,6 @@ function login(props) {
                 });
         }
     }
-
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            props.navigation.navigate('homemenu');
-        }
-    });
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Ingresar</Text>

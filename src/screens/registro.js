@@ -9,7 +9,7 @@ function registro(props) {
     const [registerError, setRegisterError] = useState('');
 
     function onSubmit(email, pass, userName) {
-        setRegisterError('');
+        setRegisterError('');   
     
         let tieneArroba = false;
     
