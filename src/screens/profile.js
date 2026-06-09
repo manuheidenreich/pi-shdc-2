@@ -1,15 +1,15 @@
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import { auth, db } from '../firebase/config';
+import { auth, db } from '../firebase/Config';
 
 function Profile(props) {
     const [Posts, setPosts] = useState([]);
+    const [username, setUsername] = useState('');
     const user = auth.currentUser;
 
     useEffect(() => {
         const unsub = db.collection('posts')
             .where('email', '==', user.email)
-            .orderBy('fecha', 'desc')
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -17,8 +17,19 @@ function Profile(props) {
                 }));
                 setPosts(data);
             });
+        
+        const unsubUser = db.collection('users')
+            .where('email', '==', user.email)
+            .onSnapshot(snapshot => {
+                snapshot.docs.forEach(doc => {
+                    setUsername(doc.data().username);
+                });
+            });
 
-        return () => unsub();
+        return () => {
+            unsub();
+            unsubUser();
+        };
     }, []);
 
     function Logout() {
@@ -35,17 +46,22 @@ function Profile(props) {
         <View style={styles.container}>
             <Text style={styles.title}>Mi Perfil</Text>
 
-            <Text style={styles.dato}>{user.displayName}</Text>
-            <Text style={styles.dato}>{user.email}</Text>
+            <Text style={styles.dato}>{username}</Text>
+            <Text style={styles.datoMenor}>{user.email}</Text>
 
             <Text style={styles.subtitulo}>Mis posteos</Text>
 
             <FlatList
-                data={posts}
+                data={Posts}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                     <View style={styles.post}>
-                        <Text>{item.descripcion}</Text>
+                        <Text style={styles.descripcion}>
+                            {item.descripcionPost}
+                        </Text>
+                        <Text style={styles.fecha}>
+                            {new Date(item.createdAt).toLocaleDateString('es-AR')}
+                        </Text>
                     </View>
                 )}
                 ListEmptyComponent={
@@ -73,16 +89,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#f1f1f1',
     },
     title: {
-        fontSize: 32,
+        fontSize: 40,
         fontWeight: 'bold',
         marginBottom: 25
     },
     dato: {
+        fontSize: 18,
+        marginBottom: 8
+    },
+    datoMenor: {
         fontSize: 16,
         marginBottom: 8
     },
     subtitulo: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
         marginTop: 20,
         marginBottom: 10
@@ -94,6 +114,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ccc',
         marginBottom: 10
+    },
+    fecha: {
+        fontSize: 12,
+        color: '#666',
+        marginTop: 5
+    },
+    descripcion: {
+        fontSize: 18,
+        marginBottom: 5
     },
     vacio: {
         color: '#999',

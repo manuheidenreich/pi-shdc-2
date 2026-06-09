@@ -2,7 +2,7 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
-import { auth } from './src/firebase/config';
+import { auth } from './src/firebase/Config';
 
 import Login from './src/screens/login';
 import Registro from './src/screens/registro';

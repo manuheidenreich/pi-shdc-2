@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
 import { useState } from 'react';
-import { db, auth } from '../firebase/config';
+import { db, auth } from '../firebase/Config';
 
 function Registro(props) {
     const [email, setEmail] = useState('');
