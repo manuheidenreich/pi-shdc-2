@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 
-import Profile from '../screens/Profile';
-import NuevoPost from '../screens/NuevoPost';
+import Profile from '../screens/profile';
+import NuevoPost from '../screens/nuevopost';
 
 
 

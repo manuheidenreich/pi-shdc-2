@@ -1,9 +1,9 @@
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import { auth, db } from '../firebase/Config';
+import { auth, db } from '../firebase/config';
 
 function Profile(props) {
-    const [posts, setPosts] = useState([]);
+    const [Posts, setPosts] = useState([]);
     const user = auth.currentUser;
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function Profile(props) {
     function Logout() {
         auth.signOut()
             .then(() => {
-                props.navigation.navigate('login');
+                props.navigation.navigate('Login');
             })
             .catch(error => {
                 console.log(error);

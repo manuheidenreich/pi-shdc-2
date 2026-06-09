@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
 import { useState,useEffect } from 'react';
-import { auth } from '../firebase/Config';
+import { auth } from '../firebase/config';
 
 function Login(props) {
 
