@@ -10,6 +10,7 @@ export default function Home(props) {
 
   useEffect(() => {
     const unsub = db.collection('posts')
+      .orderBy('createdAt', 'desc')
       .onSnapshot(snapshot => {
         const data = snapshot.docs.map(doc => ({
           id: doc.id,

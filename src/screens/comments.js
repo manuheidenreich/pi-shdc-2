@@ -4,14 +4,21 @@ import { db, auth } from '../firebase/Config';
 
 function Comments(props) {
     const postId = props.route.params.postId;
+    const [post, setPost] = useState('');
     const [comentarios, setComentarios] = useState([]);
     const [texto, setTexto] = useState('');
+    const [error, setError] = useState('');
+    const miEmail = auth.currentUser.email;
 
     useEffect(() => {
-        const unsub = db.collection('posts')
+        db.collection('posts').doc(postId).onSnapshot(doc => {
+            setPost(doc.data());
+        });
+
+        db.collection('posts')
             .doc(postId)
             .collection('comments')
-            .orderBy('createdAt', 'asc')
+            .orderBy('createdAt', 'desc')
             .onSnapshot(snapshot => {
                 const data = snapshot.docs.map(doc => ({
                     id: doc.id,
@@ -19,12 +26,11 @@ function Comments(props) {
                 }));
                 setComentarios(data);
             });
-
-        return () => unsub();
     }, []);
 
     function agregarComentario() {
         if (texto === '') {
+            setError('El comentario no puede estar vacio');
             return;
         }
 
@@ -33,48 +39,64 @@ function Comments(props) {
             .collection('comments')
             .add({
                 texto: texto,
-                email: auth.currentUser.email,
+                email: miEmail,
                 createdAt: Date.now()
             })
             .then(() => {
                 setTexto('');
+                setError('');
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
+    let likes = post.likes;
+    if (likes === undefined) {
+        likes = [];
+    }
+
+    let likeado = likes.includes(miEmail);
+
     return (
         <View style={styles.container}>
+            <View style={styles.comentario}>
+                <Text style={styles.email}>{post.email}</Text>
+                <Text style={styles.descripcion}>{post.descripcionPost}</Text>
+                <Text style={styles.likes}>Likes: {likes.length}</Text>
+            </View>
+
+            <View style={styles.formBox}>
+                <TextInput
+                    style={styles.field}
+                    placeholder='Escribi un comentario'
+                    onChangeText={text => setTexto(text)}
+                    value={texto}
+                />
+
+                {error !== '' ? <Text style={styles.errorText}>{error}</Text> : null}
+
+                <Pressable style={styles.buttonBlue} onPress={() => agregarComentario()}>
+                    <Text style={styles.buttonText}>Comentar</Text>
+                </Pressable>
+            </View>
+
             <Text style={styles.title}>Comentarios</Text>
 
-            <FlatList
-                data={comentarios}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => (
-                    <View style={styles.comentario}>
-                        <Text style={styles.email}>{item.email}</Text>
-                        <Text>{item.texto}</Text>
-                    </View>
-                )}
-                ListEmptyComponent={
-                    <Text style={styles.vacio}>No hay comentarios todavia.</Text>
-                }
-            />
-
-            <TextInput
-                style={styles.field}
-                placeholder='Escribi un comentario'
-                onChangeText={text => setTexto(text)}
-                value={texto}
-            />
-
-            <Pressable
-                style={styles.buttonBlue}
-                onPress={() => agregarComentario()}
-            >
-                <Text style={styles.buttonText}>Comentar</Text>
-            </Pressable>
+            {comentarios.length > 0 ?
+                <FlatList
+                    data={comentarios}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.comentario}>
+                            <Text style={styles.email}>{item.email}</Text>
+                            <Text>{item.texto}</Text>
+                        </View>
+                    )}
+                />
+                :
+                <Text style={styles.vacio}>Todavia no hay comentarios.</Text>
+            }
         </View>
     );
 }
@@ -88,7 +110,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        marginBottom: 20
+        marginBottom: 20,
+        marginTop: 10
     },
     comentario: {
         backgroundColor: '#fff',
@@ -98,19 +121,32 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         marginBottom: 10
     },
+    descripcion: {
+        fontSize: 15,
+        marginBottom: 8
+    },
     email: {
         fontWeight: 'bold',
         marginBottom: 4,
         fontSize: 13,
         color: '#555'
     },
-    vacio: {
-        color: '#999'
+    likes: {
+        fontSize: 14,
+        color: '#444',
+        marginTop: 5
     },
-    field: {
+    formBox: {
         backgroundColor: '#fff',
         padding: 12,
-        marginTop: 15,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginBottom: 10
+    },
+    field: {
+        backgroundColor: '#f1f1f1',
+        padding: 12,
         marginBottom: 10,
         borderRadius: 5,
         borderWidth: 1,
@@ -124,6 +160,13 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontSize: 16
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10
+    },
+    vacio: {
+        color: '#999'
     }
 });
 
