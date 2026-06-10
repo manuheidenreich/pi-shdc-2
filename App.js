@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
 import { auth } from './src/firebase/Config';
 
-import Login from './src/screens/login';
-import Registro from './src/screens/registro';
-import HomeMenu from './src/components/homemenu';
+import Login from './src/screens/Login';
+import Registro from './src/screens/Registro';
+import HomeMenu from '../src/components/HomeMenu';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    padding: 25,
     backgroundColor: '#f1f1f1',
   }
 });
