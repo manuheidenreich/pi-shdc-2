@@ -34,22 +34,11 @@ export default function Post(props) {
     return liked;
   }
 
-  function getUserName() {
-    let nombre = post.owner;
-    if (props.users) {
-      props.users.forEach(u => {
-        if (u.email === post.owner) {
-          nombre = u.username;
-        }
-      });
-    }
-    return nombre;
-  }
 
   return (
     <View style={styles.card}>
-      <Text style={styles.user}>{getUserName()}</Text>
-      <Text style={styles.description}>{post.description}</Text>
+      <Text style={styles.user}>{post.owner}(<Text>{post.email}</Text>)</Text>
+      <Text style={styles.description}>{post.descripcionPost}</Text>
       {post.image !== '' ? (
         <Image
           source={{ uri: post.image }}

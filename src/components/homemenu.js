@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import Profile from '../screens/Profile';
-import NuevoPost from '../screens/NuevoPost';
-import Home from '../screens/Home';
+
+import Profile from '../screens/profile';
+import NuevoPost from '../screens/nuevopost';
+import Home from '../screens/home';
 
 const Tab = createBottomTabNavigator();
 

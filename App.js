@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
 import { auth } from './src/firebase/Config';
 
-import Login from './src/screens/Login';
-import Registro from './src/screens/Registro';
-import HomeMenu from '../src/components/HomeMenu';
+import Login from './src/screens/login';
+import Registro from './src/screens/registro';
+import HomeMenu from './src/components/homemenu';
 
 const Stack = createNativeStackNavigator();
 

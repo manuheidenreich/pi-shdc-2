@@ -14,6 +14,7 @@ function NuevoPost() {
         db.collection('posts').add({
             descripcionPost: comentario,
             email: auth.currentUser.email,
+            owner: auth.currentUser.username,
             createdAt: Date.now(),
             likes: []
         })

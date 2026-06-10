@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/Config';
-import Post from '../components/Post';
+import Post from '../components/post';
 
 export default function Home(props) {
   const [posts, setPosts] = useState([]);
@@ -48,6 +48,7 @@ export default function Home(props) {
         renderItem={({ item }) => (
           <Post
             post={item}
+            descripcion={item.data.descripcionPost}
             users={users}
             navigation={props.navigation}
             showComments={true}
