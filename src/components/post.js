@@ -1,6 +1,7 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import firebase from '../firebase/Config';
 import { auth, db } from '../firebase/Config';
+import firestore from 'firebase/firestore';
 
 export default function Post(props) {
   const post = props.post.data;
@@ -37,7 +38,7 @@ export default function Post(props) {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.user}>{post.owner}(<Text>{post.email}</Text>)</Text>
+      <Text style={styles.user}>{post.owner} (<Text>{post.email}</Text>)</Text>
       <Text style={styles.description}>{post.descripcionPost}</Text>
       {post.image !== '' ? (
         <Image
@@ -46,6 +47,9 @@ export default function Post(props) {
           resizeMode='cover'
         />
       ) : null}
+      <Text style={styles.fecha}>
+          {new Date(post.createdAt).toLocaleDateString('es-AR')}
+      </Text>
       <Text style={styles.likes}>
         Likes: {post.likes ? post.likes.length : 0}
       </Text>
@@ -99,6 +103,11 @@ const styles = StyleSheet.create({
   likes: {
     marginBottom: 8,
     color: '#57606a'
+  },
+  fecha: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 5
   },
   likeButton: {
     color: '#1f6feb',

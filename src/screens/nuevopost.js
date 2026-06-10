@@ -1,12 +1,23 @@
 import { View, Text, Pressable, StyleSheet, TextInput} from 'react-native';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { db, auth } from '../firebase/Config';
 
 function NuevoPost() {
 
     const [comentario, setComentario] = useState('');
+    const [users, setUsers] = useState([]);
 
-     function crearPost() {
+    useEffect(() => {
+        const unsubUsers = db.collection('users')
+        .onSnapshot(snapshot => {
+            const data = snapshot.docs.map(doc => doc.data());
+            setUsers(data);
+        });
+
+    }, []);
+
+    function crearPost() {
+        let buscandoEmail = users.find(user => user.email === auth.currentUser.email);
         if (comentario === '') {
             return;
         }
@@ -14,7 +25,7 @@ function NuevoPost() {
         db.collection('posts').add({
             descripcionPost: comentario,
             email: auth.currentUser.email,
-            owner: auth.currentUser.username,
+            owner: buscandoEmail.username,
             createdAt: Date.now(),
             likes: []
         })
