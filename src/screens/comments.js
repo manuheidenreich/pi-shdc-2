@@ -1,5 +1,6 @@
 import { View, Text, TextInput, Pressable, FlatList, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
+import firebase from 'firebase';
 import { db, auth } from '../firebase/Config';
 
 function Comments(props) {
@@ -43,6 +44,11 @@ function Comments(props) {
                 createdAt: Date.now()
             })
             .then(() => {
+                db.collection('posts')
+                    .doc(postId)
+                    .update({
+                        commentCount: firebase.firestore.FieldValue.increment(1)
+                    });
                 setTexto('');
                 setError('');
             })
@@ -90,7 +96,7 @@ function Comments(props) {
                     renderItem={({ item }) => (
                         <View style={styles.comentario}>
                             <Text style={styles.email}>{item.email}</Text>
-                            <Text>{item.texto}</Text>
+                            <Text style={styles.comentarioTexto}>{item.texto}</Text>
                         </View>
                     )}
                 />
@@ -125,6 +131,10 @@ const styles = StyleSheet.create({
     descripcion: {
         fontSize: 15,
         marginBottom: 8,
+        color: '#CDC9DE'
+    },
+    comentarioTexto: {
+        fontSize: 15,
         color: '#CDC9DE'
     },
     email: {

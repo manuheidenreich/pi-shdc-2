@@ -1,11 +1,15 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
-import firebase from '../firebase/Config';
+import firebase from 'firebase';
 import { auth, db } from '../firebase/Config';
-import firestore from 'firebase/firestore';
 
 export default function Post(props) {
   const post = props.post.data;
   const postId = props.post.id;
+
+  let cantidadComentarios = post.commentCount;
+  if (cantidadComentarios === undefined) {
+      cantidadComentarios = 0;
+  }
 
   function likePost() {
     db.collection('posts')
@@ -52,6 +56,9 @@ export default function Post(props) {
       </Text>
       <Text style={styles.likes}>
         Likes: {post.likes ? post.likes.length : 0}
+      </Text>
+      <Text style={styles.likes}>
+        Comentarios: {cantidadComentarios}
       </Text>
       {userLiked() ? (
         <Pressable onPress={() => unlikePost()}>
