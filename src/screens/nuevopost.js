@@ -65,30 +65,33 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 25,
         width: '100%',
-        backgroundColor: '#f1f1f1'
+        backgroundColor: '#13111C'
     },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        marginBottom: 25
+        marginBottom: 25,
+        color: '#A78BFA'
     },
     field: {
-        backgroundColor: '#fff',
+        backgroundColor: '#1D1A29',
         padding: 12,
         marginBottom: 15,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#ccc'
+        borderColor: '#3D3659',
+        color: '#F2F0FA'
     },
     buttonBlue: {
-        backgroundColor: '#4db6e2',
+        backgroundColor: '#8B5CF6',
         padding: 15,
         borderRadius: 5,
         marginTop: 15
     },
     buttonText: {
         textAlign: 'center',
-        fontSize: 16
+        fontSize: 16,
+        color: '#FFFFFF'
     }
 });
 

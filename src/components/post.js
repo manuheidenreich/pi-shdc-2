@@ -76,23 +76,23 @@ export default function Post(props) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#1D1A29',
     padding: 16,
     borderRadius: 10,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#d0d7de'
+    borderColor: '#2E2942'
   },
   user: {
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 8,
-    color: '#24292f'
+    color: '#F2F0FA'
   },
   description: {
     fontSize: 15,
     marginBottom: 12,
-    color: '#24292f'
+    color: '#CDC9DE'
   },
   image: {
     width: '100%',
@@ -102,26 +102,26 @@ const styles = StyleSheet.create({
   },
   likes: {
     marginBottom: 8,
-    color: '#57606a'
+    color: '#22D3EE'
   },
   fecha: {
     fontSize: 12,
-    color: '#666',
+    color: '#7A7490',
     marginTop: 5
   },
   likeButton: {
-    color: '#1f6feb',
+    color: '#22D3EE',
     fontWeight: 'bold',
     marginBottom: 12
   },
   commentButton: {
-    backgroundColor: '#eaeef2',
+    backgroundColor: '#8B5CF6',
     padding: 10,
     borderRadius: 8,
     alignItems: 'center'
   },
   commentText: {
-    color: '#24292f',
+    color: '#FFFFFF',
     fontWeight: 'bold'
   }
 });

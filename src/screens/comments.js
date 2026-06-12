@@ -105,68 +105,72 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 25,
-        backgroundColor: '#f1f1f1'
+        backgroundColor: '#13111C'
     },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
         marginBottom: 20,
-        marginTop: 10
+        marginTop: 10,
+        color: '#F2F0FA'
     },
     comentario: {
-        backgroundColor: '#fff',
+        backgroundColor: '#1D1A29',
         padding: 12,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#2E2942',
         marginBottom: 10
     },
     descripcion: {
         fontSize: 15,
-        marginBottom: 8
+        marginBottom: 8,
+        color: '#CDC9DE'
     },
     email: {
         fontWeight: 'bold',
         marginBottom: 4,
         fontSize: 13,
-        color: '#555'
+        color: '#22D3EE'
     },
     likes: {
         fontSize: 14,
-        color: '#444',
+        color: '#22D3EE',
         marginTop: 5
     },
     formBox: {
-        backgroundColor: '#fff',
+        backgroundColor: '#1D1A29',
         padding: 12,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#2E2942',
         marginBottom: 10
     },
     field: {
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#13111C',
         padding: 12,
         marginBottom: 10,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#ccc'
+        borderColor: '#3D3659',
+        color: '#F2F0FA'
     },
     buttonBlue: {
-        backgroundColor: '#4db6e2',
+        backgroundColor: '#8B5CF6',
         padding: 15,
         borderRadius: 5,
     },
     buttonText: {
         textAlign: 'center',
-        fontSize: 16
+        fontSize: 16,
+        color: '#FFFFFF'
     },
     errorText: {
-        color: 'red',
+        color: '#FB7185',
         marginBottom: 10
     },
     vacio: {
-        color: '#999'
+        color: '#7A7490'
     }
 });
 

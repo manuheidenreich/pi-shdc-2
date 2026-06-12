@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/Config';
-import Post from '../components/post';
+import Post from '../components/Post';
 
 export default function Home(props) {
   const [posts, setPosts] = useState([]);
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     padding: 25,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#13111C',
   },
   cargador: {
     flex: 1,
@@ -75,50 +75,58 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 25
+    marginBottom: 25,
+    color: '#A78BFA'
   },
   dato: {
     fontSize: 18,
-    marginBottom: 8
+    marginBottom: 8,
+    color: '#F2F0FA'
   },
   datoMenor: {
     fontSize: 16,
-    marginBottom: 8
+    marginBottom: 8,
+    color: '#9B94B3'
   },
   subtitulo: {
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
+    color: '#A78BFA'
   },
   post: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1D1A29',
     padding: 12,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#2E2942',
     marginBottom: 10
   },
   fecha: {
     fontSize: 12,
-    color: '#666',
+    color: '#7A7490',
     marginTop: 5
   },
   descripcion: {
     fontSize: 18,
-    marginBottom: 5
+    marginBottom: 5,
+    color: '#CDC9DE'
   },
   vacio: {
-    color: '#999',
+    color: '#7A7490',
   },
   buttonOrange: {
-    backgroundColor: 'orange',
-    padding: 15,
-    borderRadius: 5,
-    marginTop: 15
-  },
-  buttonText: {
-    textAlign: 'center',
-    fontSize: 16
-  }
+        backgroundColor: '#2E2942',
+        padding: 15,
+        borderRadius: 5,
+        marginTop: 15,
+        borderWidth: 1,
+        borderColor: '#8B5CF6'
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#A78BFA'
+    }
 });

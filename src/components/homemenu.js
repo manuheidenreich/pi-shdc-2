@@ -2,10 +2,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-import Profile from '../screens/profile';
-import NuevoPost from '../screens/nuevopost';
-import Home from '../screens/home';
-import Comments from '../screens/comments';
+import Profile from '../screens/Profile';
+import NuevoPost from '../screens/NuevoPost';
+import Home from '../screens/Home';
+import Comments from '../screens/Comments';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
